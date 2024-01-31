@@ -13,3 +13,10 @@ after_success:
   - docker build -t dmammarella/mutli-nginx ./nginx
   - docker build -t dmammarella/mutli-server ./server
   - docker build -t dmammarella/mutli-worker ./worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take these images and push them into docker hub 
+  - docker push dmammarella/mutli-client
+  - docker push dmammarella/mutli-nginx
+  - docker push dmammarella/mutli-server
+  - docker push dmammarella/mutli-worker
