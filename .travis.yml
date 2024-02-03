@@ -20,3 +20,15 @@ after_success:
   - docker push dmammarella/mutli-nginx
   - docker push dmammarella/mutli-server
   - docker push dmammarella/mutli-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'eu-north-1'
+  app: 'multi-docker'
+  env: 'MultiDocker-env'
+  bucket_name: 'elasticbeanstalk-eu-north-1-871365248024'
+  bucket_path: 'docker-multi'
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY

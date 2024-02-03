@@ -1,0 +1,36 @@
+{
+    "AWSEBDocckerrunVersion": 2,
+    "containerDefinitions": [
+        {
+        "name": "client",
+        "image": "dmammarella/multi-client",
+        "hostname": "client", 
+        "essential": false
+        },
+        {
+        "name": "server",
+        "image": "dmammarella/multi-server",
+        "hostname": "api", 
+        "essential": false
+        },
+        {
+        "name": "worker",
+        "image": "dmammarella/multi-worker",
+        "hostname": "worker", 
+        "essential": false
+        },
+        {
+        "name": "nginx",
+        "image": "dmammarella/multi-nginx",
+        "hostname": "client", 
+        "essential": true,
+        "portMappings": [
+            {
+                "hostPort": 80,
+                "containerPort": 3050
+            }
+        ],
+        "links": ["client", "server"]
+        }
+    ]
+}
